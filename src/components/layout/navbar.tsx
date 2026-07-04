@@ -32,6 +32,9 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Every inner page opens on a dark PageHero; only the homepage hero is light.
+  const onDark = !scrolled && !open && pathname !== "/";
+
   return (
     <header
       className={cn(
@@ -43,7 +46,7 @@ export function Navbar() {
     >
       <Container>
         <nav className="flex h-20 items-center justify-between">
-          <Logo />
+          <Logo light={onDark} />
 
           <ul className="hidden items-center gap-9 lg:flex">
             {links.map((link) => (
@@ -51,8 +54,11 @@ export function Navbar() {
                 <Link
                   href={link.href}
                   className={cn(
-                    "text-[14.5px] font-medium text-navy-900/70 transition-colors hover:text-navy-900",
-                    pathname === link.href && "text-navy-900",
+                    "text-[14.5px] font-medium transition-colors",
+                    onDark
+                      ? "text-white/70 hover:text-white"
+                      : "text-navy-900/70 hover:text-navy-900",
+                    pathname === link.href && (onDark ? "text-white" : "text-navy-900"),
                   )}
                 >
                   {link.label}
@@ -68,7 +74,10 @@ export function Navbar() {
           </div>
 
           <button
-            className="flex h-10 w-10 items-center justify-center rounded-full text-navy-900 lg:hidden"
+            className={cn(
+              "flex h-10 w-10 items-center justify-center rounded-full lg:hidden",
+              onDark ? "text-white" : "text-navy-900",
+            )}
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
           >

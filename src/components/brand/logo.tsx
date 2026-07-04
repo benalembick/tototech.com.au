@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LogoMark } from "@/components/brand/logo-mark";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface LogoProps {
@@ -12,30 +12,30 @@ export function Logo({ className, tagline = false, light = false }: LogoProps) {
   return (
     <Link
       href="/"
-      className={cn("group flex items-center gap-3", className)}
+      className={cn("group inline-flex flex-col", className)}
       aria-label="TOTOTECH — home"
     >
-      <LogoMark className="h-9 w-auto shrink-0 transition-transform duration-300 group-hover:scale-105" />
-      <span className="flex flex-col leading-none">
+      <Image
+        src="/logos/logo_horiz_notag_trans-250w.png"
+        alt="TOTOTECH"
+        width={250}
+        height={91}
+        priority
+        className={cn(
+          "h-9 w-auto shrink-0 transition-transform duration-300 group-hover:scale-105",
+          light && "brightness-0 invert",
+        )}
+      />
+      {tagline && (
         <span
           className={cn(
-            "font-display text-[1.35rem] font-bold tracking-tight",
-            light ? "text-white" : "text-navy-900",
+            "mt-1.5 text-[9px] font-medium uppercase tracking-[0.22em]",
+            light ? "text-white/60" : "text-navy-900/50",
           )}
         >
-          TOTO<span className="text-gradient-inline">TECH</span>
+          Strategy &middot; Architecture &middot; Transformation
         </span>
-        {tagline && (
-          <span
-            className={cn(
-              "mt-1 text-[9px] font-medium uppercase tracking-[0.22em]",
-              light ? "text-white/60" : "text-navy-900/50",
-            )}
-          >
-            Strategy &middot; Architecture &middot; Transformation
-          </span>
-        )}
-      </span>
+      )}
     </Link>
   );
 }

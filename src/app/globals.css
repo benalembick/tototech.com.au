@@ -107,13 +107,6 @@ body {
   color: white;
 }
 
-.text-gradient-inline {
-  background-image: linear-gradient(100deg, var(--electric-600), var(--electric-300));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 .text-gradient {
   background: linear-gradient(
     100deg,
