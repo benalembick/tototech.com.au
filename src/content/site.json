@@ -1,0 +1,20 @@
+{
+  "name": "TOTOTECH",
+  "legalName": "TOTO Technology Pty Ltd",
+  "domain": "https://tototech.com.au",
+  "tagline": "Strategy • Architecture • Transformation",
+  "description": "Vendor-independent technology strategy, enterprise architecture and transformation advisory for organisations building the future.",
+  "phone": "+61 2 0000 0000",
+  "email": "hello@tototech.com.au",
+  "linkedin": "https://www.linkedin.com/company/tototech",
+  "address": {
+    "line1": "Level 12",
+    "line2": "100 Technology Street",
+    "suburb": "Sydney",
+    "state": "NSW",
+    "postcode": "2000",
+    "country": "Australia"
+  },
+  "abn": "00 000 000 000",
+  "founded": 2015
+}

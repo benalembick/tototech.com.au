@@ -1,0 +1,129 @@
+[
+  {
+    "slug": "technology-strategy",
+    "title": "Technology Strategy",
+    "icon": "Compass",
+    "summary": "Digital roadmaps and investment decisions grounded in business outcomes, not vendor agendas.",
+    "items": [
+      "Digital roadmaps",
+      "Technology planning",
+      "Investment prioritisation",
+      "Executive advisory",
+      "Business cases",
+      "Governance"
+    ]
+  },
+  {
+    "slug": "enterprise-architecture",
+    "title": "Enterprise Architecture",
+    "icon": "Network",
+    "summary": "Coherent architecture across business, application, information and technology domains.",
+    "items": [
+      "Business Architecture",
+      "Application Architecture",
+      "Information Architecture",
+      "Technology Architecture",
+      "Solution Architecture",
+      "Architecture Reviews",
+      "Reference Architectures"
+    ]
+  },
+  {
+    "slug": "business-analysis",
+    "title": "Business Analysis",
+    "icon": "ClipboardList",
+    "summary": "Rigorous analysis that turns ambiguity into requirements delivery teams can build against.",
+    "items": [
+      "Requirements",
+      "Stakeholder Engagement",
+      "Process Mapping",
+      "Gap Analysis",
+      "Current/Future State",
+      "Functional Specifications"
+    ]
+  },
+  {
+    "slug": "digital-transformation",
+    "title": "Digital Transformation",
+    "icon": "Sparkles",
+    "summary": "Operating models and modernisation programs that make transformation stick.",
+    "items": [
+      "Operating Models",
+      "Change Strategy",
+      "Technology Modernisation",
+      "Cloud Adoption",
+      "Automation",
+      "Innovation"
+    ]
+  },
+  {
+    "slug": "systems-integration",
+    "title": "Systems Integration",
+    "icon": "Cable",
+    "summary": "Integration strategy and platform design that connects the enterprise without the fragility.",
+    "items": [
+      "Integration Strategy",
+      "API Design",
+      "Middleware",
+      "Data Integration",
+      "Enterprise Platforms",
+      "System Migration"
+    ]
+  },
+  {
+    "slug": "data-information",
+    "title": "Data & Information",
+    "icon": "Database",
+    "summary": "Governance and management practices that make data trustworthy and useful.",
+    "items": [
+      "Data Governance",
+      "Information Management",
+      "Master Data",
+      "Reporting",
+      "Analytics",
+      "Data Quality"
+    ]
+  },
+  {
+    "slug": "smart-buildings",
+    "title": "Smart Buildings",
+    "icon": "Building2",
+    "summary": "AV, IoT and digital infrastructure that make physical spaces work like modern platforms.",
+    "items": [
+      "AV Technology",
+      "Hybrid Learning",
+      "Meeting Rooms",
+      "Digital Signage",
+      "IoT",
+      "Occupancy Analytics"
+    ]
+  },
+  {
+    "slug": "campus-technology",
+    "title": "Campus Technology",
+    "icon": "GraduationCap",
+    "summary": "Technology strategy purpose-built for the complexity of university and campus environments.",
+    "items": [
+      "University Technology",
+      "Teaching Spaces",
+      "Research Technology",
+      "Student Experience",
+      "Campus Transformation",
+      "Learning Technologies"
+    ]
+  },
+  {
+    "slug": "program-delivery",
+    "title": "Program Delivery",
+    "icon": "ListChecks",
+    "summary": "Hands-on delivery leadership that keeps complex technology programs on track.",
+    "items": [
+      "Technology Programs",
+      "PMO Support",
+      "Business Readiness",
+      "Implementation",
+      "Vendor Coordination",
+      "Risk Management"
+    ]
+  }
+]

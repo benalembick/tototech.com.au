@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "why-vendor-independence-matters",
+    "title": "Why vendor independence matters in enterprise architecture",
+    "excerpt": "Independent advice changes the shape of the recommendations you receive. Here's why that matters at the enterprise scale.",
+    "category": "Enterprise Architecture",
+    "date": "2026-02-10",
+    "readTime": "6 min read"
+  },
+  {
+    "slug": "campus-technology-roadmaps",
+    "title": "Building a campus technology roadmap that survives contact with reality",
+    "excerpt": "Multi-campus technology planning fails when it ignores governance. A practical approach to sequencing investment.",
+    "category": "Higher Education",
+    "date": "2026-01-22",
+    "readTime": "8 min read"
+  },
+  {
+    "slug": "smart-buildings-beyond-the-hype",
+    "title": "Smart buildings beyond the hype: what actually delivers value",
+    "excerpt": "IoT and occupancy analytics promise a lot. A grounded look at what pays off in commercial and campus environments.",
+    "category": "Smart Buildings",
+    "date": "2025-12-05",
+    "readTime": "5 min read"
+  }
+]

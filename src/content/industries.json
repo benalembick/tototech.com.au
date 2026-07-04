@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "higher-education",
+    "title": "Higher Education",
+    "icon": "GraduationCap",
+    "summary": "University technology strategy, teaching spaces and campus transformation."
+  },
+  {
+    "slug": "government",
+    "title": "Government",
+    "icon": "Landmark",
+    "summary": "Technology advisory for public sector agencies delivering citizen-facing services."
+  },
+  {
+    "slug": "corporate",
+    "title": "Corporate",
+    "icon": "Building",
+    "summary": "Enterprise architecture and transformation for large corporate organisations."
+  },
+  {
+    "slug": "health",
+    "title": "Health",
+    "icon": "HeartPulse",
+    "summary": "Technology strategy for healthcare providers operating in complex, regulated environments."
+  },
+  {
+    "slug": "construction",
+    "title": "Construction",
+    "icon": "HardHat",
+    "summary": "Digital infrastructure planning across construction and delivery programs."
+  },
+  {
+    "slug": "infrastructure",
+    "title": "Infrastructure",
+    "icon": "Waypoints",
+    "summary": "Technology architecture for major infrastructure and asset-intensive organisations."
+  },
+  {
+    "slug": "local-government",
+    "title": "Local Government",
+    "icon": "Landmark",
+    "summary": "Technology planning and governance for councils and local authorities."
+  },
+  {
+    "slug": "commercial-property",
+    "title": "Commercial Property",
+    "icon": "Building2",
+    "summary": "Smart building and workplace technology for commercial property portfolios."
+  }
+]

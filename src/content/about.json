@@ -1,0 +1,70 @@
+{
+  "intro": "TOTOTECH is an Australian-owned technology consulting and advisory practice, built on a foundation of enterprise architecture, technology strategy and hands-on delivery experience.",
+  "body": [
+    "We work with organisations navigating complex technology environments — universities, government agencies, and corporate enterprises — helping executive teams make confident, well-governed technology decisions.",
+    "Our experience spans enterprise architecture, technology strategy, business analysis and program delivery, giving us a rare combination of strategic perspective and delivery credibility. We've led architecture practices, shaped multi-year transformation roadmaps, and stayed in the room to see programs through to outcomes.",
+    "A particular depth of experience in higher education and smart buildings means we understand the unique complexity of campus environments — from teaching spaces and research infrastructure to occupancy analytics and digital signage — as well as the governance rigour expected in large, multi-stakeholder organisations.",
+    "We remain vendor-independent by design. Every recommendation is shaped by what will genuinely move your organisation forward, not by partnership arrangements or product incentives."
+  ],
+  "expertise": [
+    {
+      "title": "Enterprise Architecture",
+      "description": "Business, application, information and technology architecture practice leadership."
+    },
+    {
+      "title": "Technology Strategy",
+      "description": "Digital roadmaps, investment prioritisation and executive advisory."
+    },
+    {
+      "title": "Business Analysis",
+      "description": "Requirements, process mapping and current/future state analysis."
+    },
+    {
+      "title": "Program Delivery",
+      "description": "PMO, business readiness and hands-on implementation leadership."
+    },
+    {
+      "title": "Transformation",
+      "description": "Operating model design and technology modernisation programs."
+    },
+    {
+      "title": "Higher Education",
+      "description": "University technology strategy and campus transformation."
+    },
+    {
+      "title": "Smart Buildings",
+      "description": "AV, IoT and digital infrastructure for modern workplaces and campuses."
+    },
+    {
+      "title": "Technology Governance",
+      "description": "Architecture review, governance frameworks and risk management."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "2015",
+      "title": "Practice founded",
+      "description": "TOTOTECH established to bring independent, executive-grade technology advisory to Australian organisations."
+    },
+    {
+      "year": "2017",
+      "title": "Higher education focus",
+      "description": "Expanded into university and campus technology strategy, building deep sector expertise."
+    },
+    {
+      "year": "2019",
+      "title": "Smart buildings practice",
+      "description": "Extended capability into smart building, AV and IoT advisory for modern campuses and workplaces."
+    },
+    {
+      "year": "2021",
+      "title": "Enterprise transformation",
+      "description": "Scaled into large enterprise architecture reviews and multi-year transformation programs."
+    },
+    {
+      "year": "2024",
+      "title": "Broader enterprise reach",
+      "description": "Extended advisory reach across government, corporate and infrastructure sectors nationally."
+    }
+  ]
+}
