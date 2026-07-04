@@ -67,7 +67,7 @@ export default function Home() {
       </Section>
 
       <Section className="relative overflow-hidden bg-navy-950">
-        <div aria-hidden className="pointer-events-none absolute inset-0 grid-fade opacity-20" />
+        <div aria-hidden className="pointer-events-none absolute inset-0 grid-fade-dark opacity-50" />
         <div className="relative">
           <SectionHeading
             eyebrow="Why TOTOTECH"

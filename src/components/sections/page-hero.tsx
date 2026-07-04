@@ -13,7 +13,7 @@ export function PageHero({
 }) {
   return (
     <section className="relative overflow-hidden bg-navy-950 pb-20 pt-40 lg:pb-24 lg:pt-48">
-      <DarkHeroBackground />
+      <DarkHeroBackground seed={eyebrow} />
       <Container className="relative">
         <FadeIn>
           <span className="text-[13px] font-semibold uppercase tracking-[0.18em] text-electric-300">
