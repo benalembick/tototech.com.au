@@ -9,7 +9,7 @@ export function CaseStudyCard({ project, delay = 0 }: { project: Project; delay?
         <div className="relative flex h-44 items-center justify-center overflow-hidden bg-navy-950">
           <div
             aria-hidden
-            className="absolute inset-0 grid-fade opacity-40"
+            className="absolute inset-0 grid-fade-dark opacity-70"
           />
           <div
             aria-hidden

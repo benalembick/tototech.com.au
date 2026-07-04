@@ -15,7 +15,7 @@ export function CTA({
     <section className="relative overflow-hidden bg-navy-950 py-24 lg:py-28">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 grid-fade opacity-30"
+        className="pointer-events-none absolute inset-0 grid-fade-dark opacity-60"
       />
       <div
         aria-hidden
