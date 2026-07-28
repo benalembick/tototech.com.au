@@ -46,7 +46,7 @@ export function Navbar() {
     >
       <Container>
         <nav className="flex h-20 items-center justify-between">
-          <Logo light={onDark} />
+          <Logo light={onDark} className="h-16" />
 
           <ul className="hidden items-center gap-9 lg:flex">
             {links.map((link) => (
