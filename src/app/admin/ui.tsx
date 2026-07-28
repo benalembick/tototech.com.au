@@ -23,7 +23,7 @@ const emptyJson = "{\n  \n}";
 
 export function AdminDashboard() {
   const [authenticated, setAuthenticated] = useState(false);
-  const [email, setEmail] = useState("benalembick@gmail.com");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [files, setFiles] = useState<CmsFile[]>([]);
   const [uploads, setUploads] = useState<Upload[]>([]);
