@@ -7,8 +7,8 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
-    "preinstall": "node -e \"const p=require('path'),fs=require('fs');function root(){const c=process.cwd().replace(/\\\\/g,'/');const m=c.match(/^(.*)\\/nodevenv\\/([^/]+)\\/[^/]+\\/lib\\/?$/);const list=[process.env.INIT_CWD,m&&p.join(m[1],m[2]),process.env.PWD,process.cwd()].filter(Boolean);for(const d of list){if(fs.existsSync(p.join(d,'scripts','cpanel-preinstall.cjs'))){process.env.CPANEL_APP_ROOT=d;return d}}return process.cwd()}require(p.join(root(),'scripts','cpanel-preinstall.cjs'))\"",
-    "postinstall": "node -e \"const p=require('path'),fs=require('fs');function root(){const c=process.cwd().replace(/\\\\/g,'/');const m=c.match(/^(.*)\\/nodevenv\\/([^/]+)\\/[^/]+\\/lib\\/?$/);const list=[process.env.INIT_CWD,m&&p.join(m[1],m[2]),process.env.PWD,process.cwd()].filter(Boolean);for(const d of list){if(fs.existsSync(p.join(d,'scripts','cpanel-build.cjs'))){process.env.CPANEL_APP_ROOT=d;return d}}return process.cwd()}require(p.join(root(),'scripts','cpanel-build.cjs'))\""
+    "preinstall": "sh -c 'cwd=$(pwd); app_root=${INIT_CWD:-$PWD}; case \"$cwd\" in */nodevenv/*/*/lib) base=${cwd%%/nodevenv/*}; app=${cwd#*/nodevenv/}; app=${app%%/*}; app_root=\"$base/$app\";; esac; CPANEL_APP_ROOT=\"$app_root\" node \"$app_root/scripts/cpanel-preinstall.cjs\"'",
+    "postinstall": "sh -c 'cwd=$(pwd); app_root=${INIT_CWD:-$PWD}; case \"$cwd\" in */nodevenv/*/*/lib) base=${cwd%%/nodevenv/*}; app=${cwd#*/nodevenv/}; app=${app%%/*}; app_root=\"$base/$app\";; esac; CPANEL_APP_ROOT=\"$app_root\" node \"$app_root/scripts/cpanel-build.cjs\"'"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
