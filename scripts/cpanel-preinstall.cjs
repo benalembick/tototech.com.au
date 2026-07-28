@@ -2,7 +2,7 @@
 const { lstatSync, rmSync } = require("node:fs");
 const { dirname, join } = require("node:path");
 
-const projectRoot = dirname(process.env.npm_package_json || join(process.cwd(), "package.json"));
+const projectRoot = process.env.CPANEL_APP_ROOT || dirname(process.env.npm_package_json || join(process.cwd(), "package.json"));
 const nodeModulesPath = join(projectRoot, "node_modules");
 const nextBuildPath = join(projectRoot, ".next");
 

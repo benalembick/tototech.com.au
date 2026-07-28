@@ -3,7 +3,7 @@ const { spawnSync } = require("node:child_process");
 const { existsSync, lstatSync, rmSync } = require("node:fs");
 const { dirname, join } = require("node:path");
 
-const projectRoot = dirname(process.env.npm_package_json || join(process.cwd(), "package.json"));
+const projectRoot = process.env.CPANEL_APP_ROOT || dirname(process.env.npm_package_json || join(process.cwd(), "package.json"));
 const nodeModulesPath = join(projectRoot, "node_modules");
 const nextBin = join(projectRoot, "node_modules", "next", "dist", "bin", "next");
 
