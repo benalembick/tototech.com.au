@@ -45,10 +45,13 @@ The project includes cPanel-friendly npm lifecycle scripts so the cPanel
 - The detached rebuild logs to `cpanel-rebuild.log` in the app root and
   mirrors the known-good manual flow:
   `rm -rf node_modules .next`, `npm install --include=dev --ignore-scripts`,
-  then `npx next build --webpack`.
+  then the local Next.js binary is run directly with webpack enabled.
 - The app declares Node `22.x` in `package.json` because Node 24 on
   cPanel/CloudLinux has shown unstable WebAssembly allocation behaviour
   during Next.js builds.
+- `next.config.ts` limits production builds to one worker by default. This is
+  intentionally conservative for shared hosting; set `NEXT_BUILD_CPUS` if a
+  different deployment target can safely use more workers.
 
 If the cPanel button still fails after a major Node/Next/cPanel change, the
 manual equivalent remains:

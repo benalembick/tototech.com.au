@@ -12,6 +12,8 @@ echo "[deploy] Node path: $(command -v node)"
 echo "[deploy] npm: $(npm -v)"
 echo "[deploy] npm path: $(command -v npm)"
 echo "[deploy] PATH: $PATH"
+echo "[deploy] Incoming NODE_OPTIONS: ${NODE_OPTIONS:-<unset>}"
+echo "[deploy] Incoming npm_config_node_options: ${npm_config_node_options:-<unset>}"
 echo "[deploy] ulimit:"
 ulimit -a || true
 
@@ -28,26 +30,28 @@ if [ ! -f "$NEXT_BIN" ]; then
   exit 1
 fi
 
-echo "[deploy] Building with webpack via the same command used manually"
+echo "[deploy] Building with webpack via the local Next binary"
 echo "[deploy] Next binary exists at: $NEXT_BIN"
 echo "[deploy] Build Node path: $(command -v node)"
 
-BUILD_NPX="${CPANEL_BUILD_NPX:-}"
+BUILD_NODE="${CPANEL_BUILD_NODE:-}"
 
-if [ -z "$BUILD_NPX" ] && [ -x "/opt/alt/alt-nodejs22/root/usr/bin/npx" ]; then
-  BUILD_NPX="/opt/alt/alt-nodejs22/root/usr/bin/npx"
+if [ -z "$BUILD_NODE" ] && [ -x "/opt/alt/alt-nodejs22/root/usr/bin/node" ]; then
+  BUILD_NODE="/opt/alt/alt-nodejs22/root/usr/bin/node"
 fi
 
-if [ -z "$BUILD_NPX" ]; then
-  BUILD_NPX="$(command -v npx)"
+if [ -z "$BUILD_NODE" ]; then
+  BUILD_NODE="$(command -v node)"
 fi
 
-echo "[deploy] Build npx path: $BUILD_NPX"
-"$BUILD_NPX" --version || true
+echo "[deploy] Build node path selected: $BUILD_NODE"
+"$BUILD_NODE" -v || true
 
 env \
   -u INIT_CWD \
+  -u NODE_OPTIONS \
   -u npm_command \
+  -u npm_config_node_options \
   -u npm_config_prefix \
   -u npm_config_global_prefix \
   -u npm_config_local_prefix \
@@ -57,6 +61,6 @@ env \
   -u npm_node_execpath \
   -u npm_package_json \
   NEXT_TELEMETRY_DISABLED=1 \
-  "$BUILD_NPX" next build --webpack
+  "$BUILD_NODE" --max-old-space-size=2048 --max-semi-space-size=64 "$NEXT_BIN" build --webpack
 
 echo "[deploy] Rebuild completed successfully at $(date)"
