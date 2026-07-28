@@ -34,14 +34,19 @@ the public website so authorised users can browse normally, switch Edit
 Mode on, click editable content in context, preview changes, save them back
 to JSON, or discard them.
 
-Set a real password before exposing the site:
+Admin login requires both an authorised email address and password. The
+initial authorised admin email is `...@gmail.com`. Set a strong
+password before using the CMS:
 
 ```bash
+CMS_ADMIN_EMAILS="...@gmail.com"
 CMS_ADMIN_PASSWORD="replace-with-a-strong-password"
 CMS_SESSION_SECRET="replace-with-a-long-random-secret"
 ```
 
-If these are not set, the local fallback password is `changeme`.
+`CMS_ADMIN_PASSWORD` is required. Admin login is disabled if it is not set.
+Use `CMS_ADMIN_EMAILS` as a comma-separated list if more authorised users
+are needed later.
 
 ## Project structure
 

@@ -3,6 +3,7 @@
 /* eslint-disable react-hooks/exhaustive-deps, react-hooks/set-state-in-effect */
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 
 type CmsFile = {
   section: "pages" | "posts" | "settings";
@@ -22,6 +23,7 @@ const emptyJson = "{\n  \n}";
 
 export function AdminDashboard() {
   const [authenticated, setAuthenticated] = useState(false);
+  const [email, setEmail] = useState("benalembick@gmail.com");
   const [password, setPassword] = useState("");
   const [files, setFiles] = useState<CmsFile[]>([]);
   const [uploads, setUploads] = useState<Upload[]>([]);
@@ -53,15 +55,17 @@ export function AdminDashboard() {
     const res = await fetch("/api/admin/session", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ password }),
+      body: JSON.stringify({ email, password }),
     });
     setBusy(false);
 
     if (!res.ok) {
-      setMessage("That password did not work.");
+      const data = await res.json().catch(() => null);
+      setMessage(data?.error || "That email and password combination did not work.");
       return;
     }
 
+    setEmail("");
     setPassword("");
     setAuthenticated(true);
     await Promise.all([loadFiles(), loadUploads()]);
@@ -213,15 +217,26 @@ export function AdminDashboard() {
           </p>
           <h1 className="mt-3 font-display text-3xl font-bold text-navy-900">Admin login</h1>
           <p className="mt-3 text-sm leading-relaxed text-navy-900/60">
-            Enter the CMS password to edit local JSON content and uploaded images.
+            Enter your authorised admin email address and CMS password to edit local JSON content and uploaded images.
           </p>
+          <input
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            className="mt-6 w-full rounded-xl border border-navy-900/15 px-4 py-3 text-sm outline-none focus:border-electric-500"
+            placeholder="Email address"
+            autoComplete="username"
+            required
+            autoFocus
+          />
           <input
             type="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            className="mt-6 w-full rounded-xl border border-navy-900/15 px-4 py-3 text-sm outline-none focus:border-electric-500"
+            className="mt-3 w-full rounded-xl border border-navy-900/15 px-4 py-3 text-sm outline-none focus:border-electric-500"
             placeholder="Password"
-            autoFocus
+            autoComplete="current-password"
+            required
           />
           <button
             disabled={busy}
@@ -250,9 +265,17 @@ export function AdminDashboard() {
               Edit JSON in <code>content/</code> and upload images to <code>public/uploads/</code>.
             </p>
           </div>
-          <button onClick={logout} className="rounded-xl border border-navy-900/15 px-4 py-2 text-sm">
-            Log out
-          </button>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/"
+              className="rounded-xl bg-electric-600 px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_24px_-12px_rgba(37,99,235,0.65)] transition-colors hover:bg-electric-500"
+            >
+              Edit website visually
+            </Link>
+            <button onClick={logout} className="rounded-xl border border-navy-900/15 px-4 py-2 text-sm">
+              Log out
+            </button>
+          </div>
         </div>
 
         {message && (

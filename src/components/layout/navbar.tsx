@@ -29,8 +29,8 @@ export function Navbar({ links }: { links: NavLink[] }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Every inner page opens on a dark PageHero; only the homepage hero is light.
-  const onDark = !scrolled && !open && pathname !== "/";
+  // Most inner pages open on a dark PageHero; admin is a light application screen.
+  const onDark = !scrolled && !open && pathname !== "/" && !pathname.startsWith("/admin");
 
   return (
     <header
