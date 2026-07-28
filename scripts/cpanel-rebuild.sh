@@ -12,6 +12,8 @@ echo "[deploy] Node path: $(command -v node)"
 echo "[deploy] npm: $(npm -v)"
 echo "[deploy] npm path: $(command -v npm)"
 echo "[deploy] PATH: $PATH"
+echo "[deploy] ulimit:"
+ulimit -a || true
 
 echo "[deploy] Removing node_modules and .next to mirror the known-good manual rebuild"
 rm -rf node_modules .next
@@ -26,9 +28,10 @@ if [ ! -f "$NEXT_BIN" ]; then
   exit 1
 fi
 
-echo "[deploy] Building with webpack via local Next binary"
-echo "[deploy] Next binary: $NEXT_BIN"
+echo "[deploy] Building with webpack via the same command used manually"
+echo "[deploy] Next binary exists at: $NEXT_BIN"
 echo "[deploy] Build Node path: $(command -v node)"
+echo "[deploy] Build npx path: $(command -v npx)"
 
 env \
   -u INIT_CWD \
@@ -41,8 +44,7 @@ env \
   -u npm_lifecycle_script \
   -u npm_node_execpath \
   -u npm_package_json \
-  -u NODE_OPTIONS \
   NEXT_TELEMETRY_DISABLED=1 \
-  node "$NEXT_BIN" build --webpack
+  npx next build --webpack
 
 echo "[deploy] Rebuild completed successfully at $(date)"
