@@ -20,8 +20,8 @@ ulimit -a || true
 echo "[deploy] Removing node_modules and .next to mirror the known-good manual rebuild"
 rm -rf node_modules .next
 
-echo "[deploy] Installing dependencies with dev packages, without lifecycle recursion"
-npm install --include=dev --ignore-scripts
+echo "[deploy] Installing dependencies with dev and optional packages, without lifecycle recursion"
+npm install --include=dev --include=optional --ignore-scripts
 
 NEXT_BIN="$APP_ROOT/node_modules/next/dist/bin/next"
 
@@ -34,11 +34,7 @@ echo "[deploy] Building with webpack via the local Next binary"
 echo "[deploy] Next binary exists at: $NEXT_BIN"
 echo "[deploy] Build Node path: $(command -v node)"
 
-BUILD_NODE="${CPANEL_BUILD_NODE:-}"
-
-if [ -z "$BUILD_NODE" ] && [ -x "/opt/alt/alt-nodejs22/root/usr/bin/node" ]; then
-  BUILD_NODE="/opt/alt/alt-nodejs22/root/usr/bin/node"
-fi
+BUILD_NODE="${CPANEL_BUILD_NODE:-$(command -v node)}"
 
 if [ -z "$BUILD_NODE" ]; then
   BUILD_NODE="$(command -v node)"
