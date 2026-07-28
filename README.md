@@ -101,9 +101,23 @@ MongoDB, Firebase, Supabase or any hosted database.
 ## Contact form
 
 `src/app/api/contact/route.ts` validates submissions with the shared Zod
-schema (`src/lib/validations/contact.ts`) and currently logs the enquiry.
-Wire it up to an email or CRM provider by replacing the `console.log` with
-a provider call.
+schema (`src/lib/validations/contact.ts`) and emails enquiries to
+`admin@tototech.com.au` with the subject `Website Enquiry - {NAME}`, where
+`{NAME}` is the submitted name from the form.
+
+Configure SMTP before using the contact form:
+
+```bash
+SMTP_HOST="smtp.example.com"
+SMTP_PORT="587"
+SMTP_SECURE="false"
+SMTP_USER="smtp-username"
+SMTP_PASSWORD="smtp-password"
+CONTACT_EMAIL_FROM="website@tototech.com"
+```
+
+Use `SMTP_SECURE="true"` for port `465`. `CONTACT_EMAIL_FROM` should be an
+address your SMTP provider allows you to send from.
 
 ## SEO
 

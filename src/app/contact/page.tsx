@@ -90,8 +90,6 @@ export default async function ContactPage() {
                   <span className="mt-1 block text-[15px] font-medium text-navy-900">
                     <span data-cms-editable="true" data-cms-file="settings/site" data-cms-path="address.line1" data-cms-label="Address line 1" data-cms-type="text">{site.address.line1}</span>,{" "}
                     <span data-cms-editable="true" data-cms-file="settings/site" data-cms-path="address.line2" data-cms-label="Address line 2" data-cms-type="text">{site.address.line2}</span>
-                    <br />
-                    {site.address.suburb} {site.address.state} {site.address.postcode}
                   </span>
                 </span>
               </div>

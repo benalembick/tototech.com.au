@@ -13,6 +13,7 @@ import { contactSchema, type ContactFormValues } from "@/lib/validations/contact
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
   const {
     register,
     handleSubmit,
@@ -24,16 +25,21 @@ export function ContactForm() {
 
   const onSubmit = async (values: ContactFormValues) => {
     setStatus("idle");
+    setErrorMessage("");
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
-      if (!res.ok) throw new Error("Request failed");
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error || "Something went wrong sending your message. Please try again or email us directly.");
+      }
       setStatus("success");
       reset();
-    } catch {
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : "Something went wrong sending your message. Please try again or email us directly.");
       setStatus("error");
     }
   };
@@ -106,7 +112,7 @@ export function ContactForm() {
 
       {status === "error" && (
         <p className="text-[14px] text-red-600">
-          Something went wrong sending your message. Please try again or email us directly.
+          {errorMessage || "Something went wrong sending your message. Please try again or email us directly."}
         </p>
       )}
 
