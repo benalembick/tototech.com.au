@@ -28,6 +28,29 @@ npm run start   # run the production build locally
 npm run lint    # eslint
 ```
 
+### cPanel rebuilds
+
+The project includes cPanel-friendly npm lifecycle scripts so the cPanel
+**Run NPM Install** button can rebuild the app after updates.
+
+- `.npmrc` forces dev dependencies to be installed because Next.js needs
+  build-time packages on the server.
+- `preinstall` removes cPanel's symlinked `node_modules` only when it is a
+  symlink, then clears stale `.next` output.
+- `postinstall` runs `next build --webpack` directly to avoid Turbopack's
+  cPanel virtualenv symlink issue.
+
+If the cPanel button still fails after a major Node/Next/cPanel change, the
+manual equivalent remains:
+
+```bash
+cd ~/tototech.com.au
+git pull
+rm -rf node_modules .next
+npm install --include=dev
+npx next build --webpack
+```
+
 The admin area is available at [http://localhost:5176/admin](http://localhost:5176/admin)
 in development. Once logged in, a floating editor toolbar also appears on
 the public website so authorised users can browse normally, switch Edit
