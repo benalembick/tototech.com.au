@@ -2,13 +2,16 @@
   "name": "tototech.com.au",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "next dev -p 5176",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
     "preinstall": "sh -c 'cwd=$(pwd); app_root=${INIT_CWD:-$PWD}; case \"$cwd\" in */nodevenv/*/*/lib) base=${cwd%%/nodevenv/*}; app=${cwd#*/nodevenv/}; app=${app%%/*}; app_root=\"$base/$app\";; esac; rm -rf \"$app_root/.next\"; echo \"[deploy] Cleared stale .next build output at $app_root/.next\"'",
-    "postinstall": "sh -c 'cwd=$(pwd); app_root=${INIT_CWD:-$PWD}; case \"$cwd\" in */nodevenv/*/*/lib) base=${cwd%%/nodevenv/*}; app=${cwd#*/nodevenv/}; app=${app%%/*}; app_root=\"$base/$app\";; esac; echo \"[deploy] Starting detached rebuild. Log: $app_root/cpanel-rebuild.log\"; nohup sh \"$app_root/scripts/cpanel-rebuild.sh\" \"$app_root\" > \"$app_root/cpanel-rebuild.log\" 2>&1 &'"
+    "postinstall": "sh -c 'cwd=$(pwd); app_root=${INIT_CWD:-$PWD}; case \"$cwd\" in */nodevenv/*/*/lib) base=${cwd%%/nodevenv/*}; app=${cwd#*/nodevenv/}; app=${app%%/*}; app_root=\"$base/$app\";; esac; sh \"$app_root/scripts/cpanel-postinstall.sh\" \"$app_root\"'"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",

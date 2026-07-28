@@ -38,14 +38,17 @@ The project includes cPanel-friendly npm lifecycle scripts so the cPanel
 - `preinstall` resolves the real app root from cPanel's virtualenv path
   using shell only, then clears stale `.next` output.
 - `postinstall` resolves the real app root using shell only, then starts a
-  detached rebuild script in the background. This avoids running the Next.js
-  build inside cPanel's npm lifecycle process, which can fail with
-  WebAssembly/heap errors even when the same build works in a normal
-  terminal.
+  detached rebuild script in a new session after a short delay. This avoids
+  running the Next.js build inside cPanel's npm lifecycle process, which can
+  fail with WebAssembly/heap errors even when the same build works in a
+  normal terminal.
 - The detached rebuild logs to `cpanel-rebuild.log` in the app root and
   mirrors the known-good manual flow:
   `rm -rf node_modules .next`, `npm install --include=dev --ignore-scripts`,
   then `npx next build --webpack`.
+- The app declares Node `22.x` in `package.json` because Node 24 on
+  cPanel/CloudLinux has shown unstable WebAssembly allocation behaviour
+  during Next.js builds.
 
 If the cPanel button still fails after a major Node/Next/cPanel change, the
 manual equivalent remains:

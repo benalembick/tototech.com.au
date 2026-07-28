@@ -31,7 +31,19 @@ fi
 echo "[deploy] Building with webpack via the same command used manually"
 echo "[deploy] Next binary exists at: $NEXT_BIN"
 echo "[deploy] Build Node path: $(command -v node)"
-echo "[deploy] Build npx path: $(command -v npx)"
+
+BUILD_NPX="${CPANEL_BUILD_NPX:-}"
+
+if [ -z "$BUILD_NPX" ] && [ -x "/opt/alt/alt-nodejs22/root/usr/bin/npx" ]; then
+  BUILD_NPX="/opt/alt/alt-nodejs22/root/usr/bin/npx"
+fi
+
+if [ -z "$BUILD_NPX" ]; then
+  BUILD_NPX="$(command -v npx)"
+fi
+
+echo "[deploy] Build npx path: $BUILD_NPX"
+"$BUILD_NPX" --version || true
 
 env \
   -u INIT_CWD \
@@ -45,6 +57,6 @@ env \
   -u npm_node_execpath \
   -u npm_package_json \
   NEXT_TELEMETRY_DISABLED=1 \
-  npx next build --webpack
+  "$BUILD_NPX" next build --webpack
 
 echo "[deploy] Rebuild completed successfully at $(date)"
