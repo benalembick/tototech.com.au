@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "preinstall": "sh -c 'cwd=$(pwd); app_root=${INIT_CWD:-$PWD}; case \"$cwd\" in */nodevenv/*/*/lib) base=${cwd%%/nodevenv/*}; app=${cwd#*/nodevenv/}; app=${app%%/*}; app_root=\"$base/$app\";; esac; rm -rf \"$app_root/.next\"; echo \"[deploy] Cleared stale .next build output at $app_root/.next\"'",
-    "postinstall": "sh -c 'cwd=$(pwd); app_root=${INIT_CWD:-$PWD}; case \"$cwd\" in */nodevenv/*/*/lib) base=${cwd%%/nodevenv/*}; app=${cwd#*/nodevenv/}; app=${app%%/*}; app_root=\"$base/$app\";; esac; echo \"[deploy] Building from $app_root with npx next build --webpack\"; cd \"$app_root\" && NEXT_TELEMETRY_DISABLED=1 npx next build --webpack'"
+    "postinstall": "sh -c 'cwd=$(pwd); app_root=${INIT_CWD:-$PWD}; case \"$cwd\" in */nodevenv/*/*/lib) base=${cwd%%/nodevenv/*}; app=${cwd#*/nodevenv/}; app=${app%%/*}; app_root=\"$base/$app\";; esac; echo \"[deploy] Starting detached rebuild. Log: $app_root/cpanel-rebuild.log\"; nohup sh \"$app_root/scripts/cpanel-rebuild.sh\" \"$app_root\" > \"$app_root/cpanel-rebuild.log\" 2>&1 &'"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",

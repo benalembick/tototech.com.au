@@ -37,10 +37,15 @@ The project includes cPanel-friendly npm lifecycle scripts so the cPanel
   build-time packages on the server.
 - `preinstall` resolves the real app root from cPanel's virtualenv path
   using shell only, then clears stale `.next` output.
-- `postinstall` resolves the real app root using shell only, changes into
-  the app directory, and runs `npx next build --webpack`. This mirrors the
-  manual command that works on cPanel and avoids Turbopack's cPanel symlink
-  handling.
+- `postinstall` resolves the real app root using shell only, then starts a
+  detached rebuild script in the background. This avoids running the Next.js
+  build inside cPanel's npm lifecycle process, which can fail with
+  WebAssembly/heap errors even when the same build works in a normal
+  terminal.
+- The detached rebuild logs to `cpanel-rebuild.log` in the app root and
+  mirrors the known-good manual flow:
+  `rm -rf node_modules .next`, `npm install --include=dev --ignore-scripts`,
+  then `npx next build --webpack`.
 
 If the cPanel button still fails after a major Node/Next/cPanel change, the
 manual equivalent remains:
@@ -52,6 +57,9 @@ rm -rf node_modules .next
 npm install --include=dev
 npx next build --webpack
 ```
+
+When using the cPanel button, wait for `cpanel-rebuild.log` to show
+`Rebuild completed successfully`, then restart the Node.js app from cPanel.
 
 The admin area is available at [http://localhost:5176/admin](http://localhost:5176/admin)
 in development. Once logged in, a floating editor toolbar also appears on
