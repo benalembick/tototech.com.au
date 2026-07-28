@@ -108,16 +108,27 @@ schema (`src/lib/validations/contact.ts`) and emails enquiries to
 Configure SMTP before using the contact form:
 
 ```bash
+CONTACT_EMAIL_TO="admin@tototech.com.au"
 SMTP_HOST="smtp.example.com"
 SMTP_PORT="587"
 SMTP_SECURE="false"
 SMTP_USER="smtp-username"
 SMTP_PASSWORD="smtp-password"
-CONTACT_EMAIL_FROM="website@tototech.com"
+CONTACT_EMAIL_FROM="website@tototech.com.au"
 ```
 
 Use `SMTP_SECURE="true"` for port `465`. `CONTACT_EMAIL_FROM` should be an
 address your SMTP provider allows you to send from.
+
+## Google Maps
+
+The contact page embeds a Google Map. Set the pin location with:
+
+```bash
+CONTACT_MAP_LOCATION="Wellard, Perth, WA 6170"
+```
+
+If unset, it defaults to `Wellard, Perth, WA 6170`.
 
 ## SEO
 

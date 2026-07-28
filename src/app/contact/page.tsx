@@ -22,6 +22,8 @@ export const metadata: Metadata = {
 
 export default async function ContactPage() {
   const [contact, site] = await Promise.all([getContactContent(), getSite()]);
+  const mapLocation = process.env.CONTACT_MAP_LOCATION || "Wellard, Perth, WA 6170";
+  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(mapLocation)}&output=embed`;
 
   return (
     <>
@@ -96,16 +98,14 @@ export default async function ContactPage() {
             </div>
 
             <div className="overflow-hidden rounded-2xl border border-navy-900/8">
-              <div className="flex h-56 items-center justify-center bg-grey-100 text-center">
-                <div>
-                  <MapPin className="mx-auto h-6 w-6 text-navy-900/30" />
-                  <p className="mt-3 text-[13.5px] font-medium text-navy-900/45">
-                    <span data-cms-editable="true" data-cms-file="pages/contact" data-cms-path="mapNote" data-cms-label="Map note" data-cms-type="text">
-                      {contact.mapNote}
-                    </span>
-                  </p>
-                </div>
-              </div>
+              <iframe
+                title={`Map showing ${mapLocation}`}
+                src={mapSrc}
+                className="h-56 w-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
             </div>
           </FadeIn>
 

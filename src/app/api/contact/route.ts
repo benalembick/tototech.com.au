@@ -4,7 +4,9 @@ import { contactSchema } from "@/lib/validations/contact";
 
 export const runtime = "nodejs";
 
-const enquiryRecipient = "admin@tototech.com.au";
+function enquiryRecipient() {
+  return process.env.CONTACT_EMAIL_TO || "admin@tototech.com.au";
+}
 
 function requiredEnv(name: string) {
   const value = process.env[name];
@@ -88,7 +90,8 @@ export async function POST(request: Request) {
       },
     });
 
-    const from = process.env.CONTACT_EMAIL_FROM || process.env.SMTP_USER || enquiryRecipient;
+    const recipient = enquiryRecipient();
+    const from = process.env.CONTACT_EMAIL_FROM || process.env.SMTP_USER || recipient;
     const subject = `Website Enquiry - ${enquiry.name.trim()}`;
     const text = [
       `Name: ${enquiry.name}`,
@@ -111,7 +114,7 @@ export async function POST(request: Request) {
     `;
 
     await transporter.sendMail({
-      to: enquiryRecipient,
+      to: recipient,
       from,
       replyTo: enquiry.email,
       subject,
