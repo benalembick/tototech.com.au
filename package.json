@@ -7,8 +7,8 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
-    "preinstall": "sh -c 'cwd=$(pwd); app_root=${INIT_CWD:-$PWD}; case \"$cwd\" in */nodevenv/*/*/lib) base=${cwd%%/nodevenv/*}; app=${cwd#*/nodevenv/}; app=${app%%/*}; app_root=\"$base/$app\";; esac; CPANEL_APP_ROOT=\"$app_root\" node \"$app_root/scripts/cpanel-preinstall.cjs\"'",
-    "postinstall": "sh -c 'cwd=$(pwd); app_root=${INIT_CWD:-$PWD}; case \"$cwd\" in */nodevenv/*/*/lib) base=${cwd%%/nodevenv/*}; app=${cwd#*/nodevenv/}; app=${app%%/*}; app_root=\"$base/$app\";; esac; CPANEL_APP_ROOT=\"$app_root\" node \"$app_root/scripts/cpanel-build.cjs\"'"
+    "preinstall": "sh -c 'cwd=$(pwd); app_root=${INIT_CWD:-$PWD}; case \"$cwd\" in */nodevenv/*/*/lib) base=${cwd%%/nodevenv/*}; app=${cwd#*/nodevenv/}; app=${app%%/*}; app_root=\"$base/$app\";; esac; CPANEL_APP_ROOT=\"$app_root\" node --max-old-space-size=1536 --max-semi-space-size=64 \"$app_root/scripts/cpanel-preinstall.cjs\"'",
+    "postinstall": "sh -c 'cwd=$(pwd); app_root=${INIT_CWD:-$PWD}; case \"$cwd\" in */nodevenv/*/*/lib) base=${cwd%%/nodevenv/*}; app=${cwd#*/nodevenv/}; app=${app%%/*}; app_root=\"$base/$app\";; esac; CPANEL_APP_ROOT=\"$app_root\" node --max-old-space-size=1536 --max-semi-space-size=64 \"$app_root/scripts/cpanel-build.cjs\"'"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",

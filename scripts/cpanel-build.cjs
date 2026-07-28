@@ -31,7 +31,10 @@ if (!nextBin) {
 console.log(`[deploy] Building app from ${projectRoot}`);
 console.log(`[deploy] Using Next.js binary at ${nextBin}`);
 
-const result = spawnSync(process.execPath, [nextBin, "build", "--webpack"], {
+const result = spawnSync(
+  process.execPath,
+  ["--max-old-space-size=1536", "--max-semi-space-size=64", nextBin, "build", "--webpack"],
+  {
   cwd: projectRoot,
   stdio: "inherit",
   env: {
