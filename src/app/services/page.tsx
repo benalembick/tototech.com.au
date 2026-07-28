@@ -34,7 +34,7 @@ export default async function ServicesPage() {
       <Section>
         <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => (
-            <ServiceCard service={service} delay={(i % 3) * 0.06} key={service.slug} />
+            <ServiceCard service={service} index={i} delay={(i % 3) * 0.06} key={service.slug} />
           ))}
         </Stagger>
       </Section>

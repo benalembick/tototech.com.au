@@ -34,7 +34,7 @@ export default async function ProjectsPage() {
       <Section>
         <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, i) => (
-            <CaseStudyCard project={project} delay={(i % 3) * 0.06} key={project.slug} />
+            <CaseStudyCard project={project} index={i} delay={(i % 3) * 0.06} key={project.slug} />
           ))}
         </Stagger>
       </Section>

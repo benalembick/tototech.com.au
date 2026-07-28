@@ -29,7 +29,12 @@ npm run lint    # eslint
 ```
 
 The admin area is available at [http://localhost:5176/admin](http://localhost:5176/admin)
-in development. Set a real password before exposing the site:
+in development. Once logged in, a floating editor toolbar also appears on
+the public website so authorised users can browse normally, switch Edit
+Mode on, click editable content in context, preview changes, save them back
+to JSON, or discard them.
+
+Set a real password before exposing the site:
 
 ```bash
 CMS_ADMIN_PASSWORD="replace-with-a-strong-password"
@@ -72,6 +77,15 @@ Most site content is now edited from `/admin` and saved directly to JSON
 files in `content/`. Uploaded images are saved to `public/uploads/` and
 can be referenced in JSON as `/uploads/filename.ext`.
 
+There are two editing modes:
+
+- Visual editing on the public site for common text, rich text, links and
+  repeatable content cards.
+- `/admin` for advanced/raw JSON editing.
+
+Visual Edit Mode is only shown after authentication. Public visitors see
+the site normally.
+
 The legacy `src/content/*.json` files remain as read-only fallbacks so the
 site still renders if a local content file is missing. New edits should be
 made through `/admin` or directly in `content/`, not `src/content/`.
@@ -104,3 +118,9 @@ Important: file writing and image uploads will not work properly on purely
 static hosts, read-only serverless filesystems, or deployments that discard
 runtime filesystem changes. Use a persistent server or a compatible
 deployment target with writable persistent storage.
+
+If the deployment filesystem is ephemeral, visual edits may appear to save
+temporarily and then disappear after a restart or redeploy. The JSON files
+under `content/` remain the source of truth, so use persistent disk storage
+or commit exported content changes back into the repository for durable
+publishing.

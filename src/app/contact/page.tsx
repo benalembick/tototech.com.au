@@ -29,6 +29,12 @@ export default async function ContactPage() {
         eyebrow={contact.hero.eyebrow}
         title={contact.hero.title}
         description={contact.hero.description}
+        edit={{
+          file: "pages/contact",
+          eyebrowPath: "hero.eyebrow",
+          titlePath: "hero.title",
+          descriptionPath: "hero.description",
+        }}
       />
 
       <Section>
@@ -47,7 +53,9 @@ export default async function ContactPage() {
                     Email
                   </span>
                   <span className="mt-1 block text-[15px] font-medium text-navy-900">
-                    {site.email}
+                    <span data-cms-editable="true" data-cms-file="settings/site" data-cms-path="email" data-cms-label="Email address" data-cms-type="text">
+                      {site.email}
+                    </span>
                   </span>
                 </span>
               </a>
@@ -64,7 +72,9 @@ export default async function ContactPage() {
                     Phone
                   </span>
                   <span className="mt-1 block text-[15px] font-medium text-navy-900">
-                    {site.phone}
+                    <span data-cms-editable="true" data-cms-file="settings/site" data-cms-path="phone" data-cms-label="Phone number" data-cms-type="text">
+                      {site.phone}
+                    </span>
                   </span>
                 </span>
               </a>
@@ -78,7 +88,8 @@ export default async function ContactPage() {
                     Office
                   </span>
                   <span className="mt-1 block text-[15px] font-medium text-navy-900">
-                    {site.address.line1}, {site.address.line2}
+                    <span data-cms-editable="true" data-cms-file="settings/site" data-cms-path="address.line1" data-cms-label="Address line 1" data-cms-type="text">{site.address.line1}</span>,{" "}
+                    <span data-cms-editable="true" data-cms-file="settings/site" data-cms-path="address.line2" data-cms-label="Address line 2" data-cms-type="text">{site.address.line2}</span>
                     <br />
                     {site.address.suburb} {site.address.state} {site.address.postcode}
                   </span>
@@ -91,7 +102,9 @@ export default async function ContactPage() {
                 <div>
                   <MapPin className="mx-auto h-6 w-6 text-navy-900/30" />
                   <p className="mt-3 text-[13.5px] font-medium text-navy-900/45">
-                    {contact.mapNote}
+                    <span data-cms-editable="true" data-cms-file="pages/contact" data-cms-path="mapNote" data-cms-label="Map note" data-cms-type="text">
+                      {contact.mapNote}
+                    </span>
                   </p>
                 </div>
               </div>

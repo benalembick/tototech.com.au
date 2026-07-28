@@ -54,9 +54,99 @@ export async function writeJsonFile(section: string, slug: string, value: unknow
   await ensureCmsDirectories();
   const filePath = safeContentPath(section, slug);
   const tmpPath = `${filePath}.${Date.now()}.tmp`;
-  const serialized = `${JSON.stringify(value, null, 2)}\n`;
+  const serialized = `${JSON.stringify(sanitizeCmsValue(value), null, 2)}\n`;
   await writeFile(tmpPath, serialized, "utf8");
   await rename(tmpPath, filePath);
+}
+
+const allowedHtmlTags = new Set([
+  "p",
+  "br",
+  "strong",
+  "b",
+  "em",
+  "i",
+  "u",
+  "ul",
+  "ol",
+  "li",
+  "a",
+  "blockquote",
+  "h2",
+  "h3",
+  "h4",
+  "img",
+]);
+
+function sanitizeCmsString(value: string) {
+  return value
+    .replace(/<\s*(script|style|iframe|object|embed|form|input|button)[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi, "")
+    .replace(/\s+on[a-z]+\s*=\s*(['"]).*?\1/gi, "")
+    .replace(/\s+on[a-z]+\s*=\s*[^\s>]+/gi, "")
+    .replace(/\s+javascript\s*:/gi, "")
+    .replace(/<\/?([a-z0-9-]+)([^>]*)>/gi, (match, tagName: string, attrs: string) => {
+      const tag = tagName.toLowerCase();
+      if (!allowedHtmlTags.has(tag)) return "";
+      if (tag === "img") {
+        if (match.startsWith("</")) return "";
+        const src = getHtmlAttr(attrs, "src");
+        if (!src || !isSafeImageSrc(src)) return "";
+        const alt = escapeHtmlAttr(getHtmlAttr(attrs, "alt") || "");
+        return `<img src="${escapeHtmlAttr(src)}" alt="${alt}">`;
+      }
+
+      const style = safeTextAlignStyle(attrs);
+      if (tag !== "a") return match.startsWith("</") ? `</${tag}>` : `<${tag}${style}>`;
+
+      const href = getHtmlAttr(attrs, "href");
+      if (!isSafeHref(href)) return match.startsWith("</") ? "</a>" : "<a>";
+
+      return match.startsWith("</") ? "</a>" : `<a href="${escapeHtmlAttr(href)}" rel="noopener noreferrer">`;
+    });
+}
+
+function getHtmlAttr(attrs: string, name: string) {
+  const match = attrs.match(new RegExp(`\\s+${name}\\s*=\\s*(['"])(.*?)\\1`, "i"));
+  return match?.[2] || "";
+}
+
+function safeTextAlignStyle(attrs: string) {
+  const style = getHtmlAttr(attrs, "style");
+  const align = style.match(/text-align\s*:\s*(left|center|right|justify)/i)?.[1]?.toLowerCase();
+  return align ? ` style="text-align: ${align}"` : "";
+}
+
+function escapeHtmlAttr(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function isSafeHref(value: string) {
+  return (
+    value.startsWith("/") ||
+    value.startsWith("#") ||
+    value.startsWith("mailto:") ||
+    value.startsWith("tel:") ||
+    /^https?:\/\//i.test(value)
+  );
+}
+
+function isSafeImageSrc(value: string) {
+  return value.startsWith("/uploads/") || /^https?:\/\//i.test(value);
+}
+
+function sanitizeCmsValue(value: unknown): unknown {
+  if (typeof value === "string") return sanitizeCmsString(value);
+  if (Array.isArray(value)) return value.map(sanitizeCmsValue);
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, entry]) => [key, sanitizeCmsValue(entry)]),
+    );
+  }
+  return value;
 }
 
 export async function deleteJsonFile(section: string, slug: string) {

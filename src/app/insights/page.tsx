@@ -4,6 +4,7 @@ import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/layout/section";
 import { FadeIn } from "@/components/layout/animation-wrapper";
 import { getInsights } from "@/lib/content-data";
+import { Editable } from "@/components/cms/editable";
 
 export const dynamic = "force-dynamic";
 
@@ -42,16 +43,37 @@ export default async function InsightsPage() {
         <div className="grid gap-6 lg:grid-cols-3">
           {insights.map((post, i) => (
             <FadeIn key={post.slug} delay={(i % 3) * 0.06} className="h-full">
-              <article className="group flex h-full flex-col rounded-2xl border border-navy-900/8 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-electric-400/30 hover:shadow-[0_24px_48px_-24px_rgba(11,24,54,0.16)]">
+              <article
+                data-cms-editable="true"
+                data-cms-file="posts/insights"
+                data-cms-path={`${i}`}
+                data-cms-label={`Insight: ${post.title}`}
+                data-cms-type="collection"
+                data-cms-collection-index={i}
+                className="group flex h-full flex-col rounded-2xl border border-navy-900/8 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-electric-400/30 hover:shadow-[0_24px_48px_-24px_rgba(11,24,54,0.16)]"
+              >
                 <span className="text-[12.5px] font-semibold uppercase tracking-wide text-electric-600">
-                  {post.category}
+                  <span data-cms-editable="true" data-cms-file="posts/insights" data-cms-path={`${i}.category`} data-cms-label={`Insight category: ${post.title}`} data-cms-type="text">
+                    {post.category}
+                  </span>
                 </span>
                 <h2 className="mt-3 font-display text-xl font-bold leading-snug tracking-tight text-navy-900">
-                  {post.title}
+                  <span data-cms-editable="true" data-cms-file="posts/insights" data-cms-path={`${i}.title`} data-cms-label={`Insight title: ${post.title}`} data-cms-type="text">
+                    {post.title}
+                  </span>
                 </h2>
-                <p className="mt-3 flex-1 text-[14.5px] leading-relaxed text-navy-900/55">
-                  {post.excerpt}
-                </p>
+                <div className="mt-3 flex-1 text-[14.5px] leading-relaxed text-navy-900/55">
+                  <Editable
+                    file="posts/insights"
+                    path={`${i}.excerpt`}
+                    label={`Insight excerpt: ${post.title}`}
+                    type="rich"
+                    multiline
+                    as="div"
+                  >
+                    {post.excerpt}
+                  </Editable>
+                </div>
                 <div className="mt-6 flex items-center gap-4 border-t border-navy-900/8 pt-5 text-[13px] text-navy-900/45">
                   <span className="flex items-center gap-1.5">
                     <Calendar className="h-3.5 w-3.5" />

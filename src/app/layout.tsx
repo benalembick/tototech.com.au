@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { VisualEditor } from "@/components/cms/visual-editor";
 import { getNav, getSite } from "@/lib/content-data";
 import "./globals.css";
 
@@ -108,6 +109,7 @@ export default async function RootLayout({
         <Navbar links={nav.primary} />
         <main className="flex-1">{children}</main>
         <Footer />
+        <VisualEditor />
       </body>
     </html>
   );

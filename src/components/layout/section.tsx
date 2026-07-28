@@ -23,9 +23,9 @@ export function SectionHeading({
   align = "left",
   className,
 }: {
-  eyebrow?: string;
+  eyebrow?: React.ReactNode;
   title: React.ReactNode;
-  description?: string;
+  description?: React.ReactNode;
   align?: "left" | "center";
   className?: string;
 }) {
@@ -47,9 +47,9 @@ export function SectionHeading({
         {title}
       </h2>
       {description && (
-        <p className="mt-4 text-lg leading-relaxed text-navy-900/60">
+        <div className="mt-4 text-lg leading-relaxed text-navy-900/60">
           {description}
-        </p>
+        </div>
       )}
     </div>
   );

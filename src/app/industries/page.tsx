@@ -34,7 +34,7 @@ export default async function IndustriesPage() {
       <Section>
         <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {industries.map((industry, i) => (
-            <IndustryCard industry={industry} delay={(i % 4) * 0.06} key={industry.slug} />
+            <IndustryCard industry={industry} index={i} delay={(i % 4) * 0.06} key={industry.slug} />
           ))}
         </Stagger>
       </Section>

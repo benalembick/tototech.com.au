@@ -11,6 +11,7 @@ import { AnimatedStats } from "@/components/sections/animated-counter";
 import { CTA } from "@/components/sections/cta";
 import { Button } from "@/components/ui/button";
 import { getHomeContent, getIndustries, getProjects, getServices, getStats, getWhyUs } from "@/lib/content-data";
+import { Editable } from "@/components/cms/editable";
 
 export const dynamic = "force-dynamic";
 
@@ -34,13 +35,13 @@ export default async function Home() {
 
       <Section className="bg-grey-50">
         <SectionHeading
-          eyebrow={home.sections.services.eyebrow}
-          title={home.sections.services.title}
-          description={home.sections.services.description}
+          eyebrow={<Editable file="pages/home" path="sections.services.eyebrow" label="Services eyebrow">{home.sections.services.eyebrow}</Editable>}
+          title={<Editable file="pages/home" path="sections.services.title" label="Services heading">{home.sections.services.title}</Editable>}
+          description={<Editable file="pages/home" path="sections.services.description" label="Services description" type="rich" multiline>{home.sections.services.description}</Editable>}
         />
         <Stagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.slice(0, 6).map((service, i) => (
-            <ServiceCard service={service} delay={i * 0.06} key={service.slug} />
+            <ServiceCard service={service} index={i} delay={i * 0.06} key={service.slug} />
           ))}
         </Stagger>
         <div className="mt-12 flex justify-center">
@@ -55,13 +56,13 @@ export default async function Home() {
 
       <Section>
         <SectionHeading
-          eyebrow={home.sections.industries.eyebrow}
-          title={home.sections.industries.title}
-          description={home.sections.industries.description}
+          eyebrow={<Editable file="pages/home" path="sections.industries.eyebrow" label="Industries eyebrow">{home.sections.industries.eyebrow}</Editable>}
+          title={<Editable file="pages/home" path="sections.industries.title" label="Industries heading">{home.sections.industries.title}</Editable>}
+          description={<Editable file="pages/home" path="sections.industries.description" label="Industries description" type="rich" multiline>{home.sections.industries.description}</Editable>}
         />
         <Stagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {industries.map((industry, i) => (
-            <IndustryCard industry={industry} delay={i * 0.05} key={industry.slug} />
+            <IndustryCard industry={industry} index={i} delay={i * 0.05} key={industry.slug} />
           ))}
         </Stagger>
       </Section>
@@ -70,9 +71,9 @@ export default async function Home() {
         <div aria-hidden className="pointer-events-none absolute inset-0 grid-fade-dark opacity-50" />
         <div className="relative">
           <SectionHeading
-            eyebrow={home.sections.whyUs.eyebrow}
-            title={<span className="text-white">{home.sections.whyUs.title}</span>}
-            description={home.sections.whyUs.description}
+            eyebrow={<Editable file="pages/home" path="sections.whyUs.eyebrow" label="Why us eyebrow">{home.sections.whyUs.eyebrow}</Editable>}
+            title={<span className="text-white"><Editable file="pages/home" path="sections.whyUs.title" label="Why us heading">{home.sections.whyUs.title}</Editable></span>}
+            description={<Editable file="pages/home" path="sections.whyUs.description" label="Why us description" type="rich" multiline>{home.sections.whyUs.description}</Editable>}
             className="[&_p]:text-white/55"
           />
           <Stagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -85,13 +86,13 @@ export default async function Home() {
 
       <Section className="bg-grey-50">
         <SectionHeading
-          eyebrow={home.sections.projects.eyebrow}
-          title={home.sections.projects.title}
-          description={home.sections.projects.description}
+          eyebrow={<Editable file="pages/home" path="sections.projects.eyebrow" label="Projects eyebrow">{home.sections.projects.eyebrow}</Editable>}
+          title={<Editable file="pages/home" path="sections.projects.title" label="Projects heading">{home.sections.projects.title}</Editable>}
+          description={<Editable file="pages/home" path="sections.projects.description" label="Projects description" type="rich" multiline>{home.sections.projects.description}</Editable>}
         />
         <Stagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.slice(0, 3).map((project, i) => (
-            <CaseStudyCard project={project} delay={i * 0.06} key={project.slug} />
+            <CaseStudyCard project={project} index={i} delay={i * 0.06} key={project.slug} />
           ))}
         </Stagger>
         <div className="mt-12 flex justify-center">
