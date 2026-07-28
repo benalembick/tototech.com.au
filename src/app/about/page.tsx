@@ -4,10 +4,9 @@ import { Section, SectionHeading } from "@/components/layout/section";
 import { FadeIn } from "@/components/layout/animation-wrapper";
 import { Timeline } from "@/components/sections/timeline";
 import { CTA } from "@/components/sections/cta";
-import aboutData from "@/content/about.json";
-import type { AboutContent } from "@/lib/types";
+import { getAboutContent } from "@/lib/content-data";
 
-const about = aboutData as AboutContent;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "About",
@@ -21,7 +20,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const about = await getAboutContent();
+
   return (
     <>
       <PageHero

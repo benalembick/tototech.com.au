@@ -4,10 +4,9 @@ import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/layout/section";
 import { FadeIn } from "@/components/layout/animation-wrapper";
 import { ContactForm } from "@/components/sections/contact-form";
-import siteData from "@/content/site.json";
-import type { SiteConfig } from "@/lib/types";
+import { getContactContent, getSite } from "@/lib/content-data";
 
-const site = siteData as SiteConfig;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -21,13 +20,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const [contact, site] = await Promise.all([getContactContent(), getSite()]);
+
   return (
     <>
       <PageHero
-        eyebrow="Contact"
-        title="Book a confidential consultation"
-        description="Tell us about your organisation and what you're looking to achieve. We'll respond within one business day."
+        eyebrow={contact.hero.eyebrow}
+        title={contact.hero.title}
+        description={contact.hero.description}
       />
 
       <Section>
@@ -90,7 +91,7 @@ export default function ContactPage() {
                 <div>
                   <MapPin className="mx-auto h-6 w-6 text-navy-900/30" />
                   <p className="mt-3 text-[13.5px] font-medium text-navy-900/45">
-                    Map loads here once a Google Maps API key is configured
+                    {contact.mapNote}
                   </p>
                 </div>
               </div>

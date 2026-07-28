@@ -1,10 +1,13 @@
 import { ImageResponse } from "next/og";
-import siteData from "@/content/site.json";
+import { getSite } from "@/lib/content-data";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+export const runtime = "nodejs";
 
-export default function OGImage() {
+export default async function OGImage() {
+  const site = await getSite();
+
   return new ImageResponse(
     (
       <div
@@ -33,7 +36,7 @@ export default function OGImage() {
             <path d="M42 4 H94 L82 24 H64 V78 L58 82 V24 H50 Z" fill="url(#g)" />
           </svg>
           <div style={{ display: "flex", fontSize: 34, fontWeight: 700, color: "#ffffff", letterSpacing: -0.5 }}>
-            TOTOTECH
+            {site.name}
           </div>
         </div>
 
@@ -62,7 +65,7 @@ export default function OGImage() {
             textTransform: "uppercase",
           }}
         >
-          {siteData.tagline}
+          {site.tagline}
         </div>
       </div>
     ),

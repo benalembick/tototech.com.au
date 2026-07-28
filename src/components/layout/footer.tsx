@@ -3,17 +3,11 @@ import { Mail, MapPin } from "lucide-react";
 import { LinkedInIcon } from "@/components/icons/linkedin-icon";
 import { Logo } from "@/components/brand/logo";
 import { Container } from "@/components/layout/container";
-import navData from "@/content/nav.json";
-import siteData from "@/content/site.json";
-import type { FooterColumn, NavLink } from "@/lib/types";
-import type { SiteConfig } from "@/lib/types";
+import { getNav, getSite } from "@/lib/content-data";
 
-const columns = navData.footerColumns as FooterColumn[];
-const legal = navData.legal as NavLink[];
-const site = siteData as SiteConfig;
-
-export function Footer() {
+export async function Footer() {
   const year = new Date().getFullYear();
+  const [nav, site] = await Promise.all([getNav(), getSite()]);
 
   return (
     <footer className="border-t border-navy-900/8 bg-navy-950 text-white/70">
@@ -44,7 +38,7 @@ export function Footer() {
             </div>
           </div>
 
-          {columns.map((col) => (
+          {nav.footerColumns.map((col) => (
             <div key={col.title}>
               <h3 className="text-[13px] font-semibold uppercase tracking-wide text-white/40">
                 {col.title}
@@ -78,7 +72,7 @@ export function Footer() {
             &copy; {year} {site.legalName}. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            {legal.map((link) => (
+            {nav.legal.map((link) => (
               <Link key={link.href} href={link.href} className="hover:text-white/70">
                 {link.label}
               </Link>

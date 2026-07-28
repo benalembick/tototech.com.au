@@ -4,10 +4,9 @@ import { Section } from "@/components/layout/section";
 import { Stagger } from "@/components/layout/animation-wrapper";
 import { ServiceCard } from "@/components/sections/service-card";
 import { CTA } from "@/components/sections/cta";
-import servicesData from "@/content/services.json";
-import type { Service } from "@/lib/types";
+import { getServices } from "@/lib/content-data";
 
-const services = servicesData as Service[];
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -21,7 +20,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const services = await getServices();
+
   return (
     <>
       <PageHero

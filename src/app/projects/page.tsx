@@ -4,10 +4,9 @@ import { Section } from "@/components/layout/section";
 import { Stagger } from "@/components/layout/animation-wrapper";
 import { CaseStudyCard } from "@/components/sections/case-study-card";
 import { CTA } from "@/components/sections/cta";
-import projectsData from "@/content/projects.json";
-import type { Project } from "@/lib/types";
+import { getProjects } from "@/lib/content-data";
 
-const projects = projectsData as Project[];
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -21,7 +20,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const projects = await getProjects();
+
   return (
     <>
       <PageHero

@@ -1,0 +1,8 @@
+{
+  "hero": {
+    "eyebrow": "Contact",
+    "title": "Book a confidential consultation",
+    "description": "Tell us about your organisation and what you're looking to achieve. We'll respond within one business day."
+  },
+  "mapNote": "Map loads here once a Google Maps API key is configured"
+}

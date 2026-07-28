@@ -10,23 +10,23 @@ import { CaseStudyCard } from "@/components/sections/case-study-card";
 import { AnimatedStats } from "@/components/sections/animated-counter";
 import { CTA } from "@/components/sections/cta";
 import { Button } from "@/components/ui/button";
-import servicesData from "@/content/services.json";
-import industriesData from "@/content/industries.json";
-import whyUsData from "@/content/why-us.json";
-import projectsData from "@/content/projects.json";
-import statsData from "@/content/stats.json";
-import type { Service, Industry, WhyUsItem, Project, Stat } from "@/lib/types";
+import { getHomeContent, getIndustries, getProjects, getServices, getStats, getWhyUs } from "@/lib/content-data";
 
-const services = servicesData as Service[];
-const industries = industriesData as Industry[];
-const whyUs = whyUsData as WhyUsItem[];
-const projects = projectsData as Project[];
-const stats = statsData as Stat[];
+export const dynamic = "force-dynamic";
 
-export default function Home() {
+export default async function Home() {
+  const [home, services, industries, whyUs, projects, stats] = await Promise.all([
+    getHomeContent(),
+    getServices(),
+    getIndustries(),
+    getWhyUs(),
+    getProjects(),
+    getStats(),
+  ]);
+
   return (
     <>
-      <Hero />
+      <Hero content={home.hero} />
 
       <Section className="pt-0 lg:pt-0">
         <AnimatedStats stats={stats} />
@@ -34,9 +34,9 @@ export default function Home() {
 
       <Section className="bg-grey-50">
         <SectionHeading
-          eyebrow="Services"
-          title="Advisory across the full technology lifecycle"
-          description="From strategy and architecture through to hands-on delivery — a single, vendor-independent partner across the technology decisions that matter."
+          eyebrow={home.sections.services.eyebrow}
+          title={home.sections.services.title}
+          description={home.sections.services.description}
         />
         <Stagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.slice(0, 6).map((service, i) => (
@@ -55,9 +55,9 @@ export default function Home() {
 
       <Section>
         <SectionHeading
-          eyebrow="Industries"
-          title="Sector depth across complex environments"
-          description="Deep experience across the industries where technology decisions carry genuine organisational weight."
+          eyebrow={home.sections.industries.eyebrow}
+          title={home.sections.industries.title}
+          description={home.sections.industries.description}
         />
         <Stagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {industries.map((industry, i) => (
@@ -70,9 +70,9 @@ export default function Home() {
         <div aria-hidden className="pointer-events-none absolute inset-0 grid-fade-dark opacity-50" />
         <div className="relative">
           <SectionHeading
-            eyebrow="Why TOTOTECH"
-            title={<span className="text-white">A trusted, independent advisor</span>}
-            description="Executive-grade advisory built on genuine delivery experience — not just frameworks and slideware."
+            eyebrow={home.sections.whyUs.eyebrow}
+            title={<span className="text-white">{home.sections.whyUs.title}</span>}
+            description={home.sections.whyUs.description}
             className="[&_p]:text-white/55"
           />
           <Stagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -85,9 +85,9 @@ export default function Home() {
 
       <Section className="bg-grey-50">
         <SectionHeading
-          eyebrow="Featured Projects"
-          title="Outcomes across enterprise, education and infrastructure"
-          description="A selection of representative engagements across strategy, architecture and transformation."
+          eyebrow={home.sections.projects.eyebrow}
+          title={home.sections.projects.title}
+          description={home.sections.projects.description}
         />
         <Stagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.slice(0, 3).map((project, i) => (

@@ -3,10 +3,9 @@ import { Calendar, Clock } from "lucide-react";
 import { PageHero } from "@/components/sections/page-hero";
 import { Section } from "@/components/layout/section";
 import { FadeIn } from "@/components/layout/animation-wrapper";
-import insightsData from "@/content/insights.json";
-import type { InsightPost } from "@/lib/types";
+import { getInsights } from "@/lib/content-data";
 
-const insights = insightsData as InsightPost[];
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Insights",
@@ -28,7 +27,9 @@ function formatDate(date: string) {
   });
 }
 
-export default function InsightsPage() {
+export default async function InsightsPage() {
+  const insights = await getInsights();
+
   return (
     <>
       <PageHero

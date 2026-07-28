@@ -1,0 +1,43 @@
+{
+  "primary": [
+    { "label": "Services", "href": "/services" },
+    { "label": "Industries", "href": "/industries" },
+    { "label": "Projects", "href": "/projects" },
+    { "label": "About", "href": "/about" },
+    { "label": "Insights", "href": "/insights" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "footerColumns": [
+    {
+      "title": "Company",
+      "links": [
+        { "label": "About", "href": "/about" },
+        { "label": "Projects", "href": "/projects" },
+        { "label": "Insights", "href": "/insights" },
+        { "label": "Contact", "href": "/contact" }
+      ]
+    },
+    {
+      "title": "Services",
+      "links": [
+        { "label": "Technology Strategy", "href": "/services#technology-strategy" },
+        { "label": "Enterprise Architecture", "href": "/services#enterprise-architecture" },
+        { "label": "Digital Transformation", "href": "/services#digital-transformation" },
+        { "label": "Systems Integration", "href": "/services#systems-integration" },
+        { "label": "Smart Buildings", "href": "/services#smart-buildings" }
+      ]
+    },
+    {
+      "title": "Industries",
+      "links": [
+        { "label": "Higher Education", "href": "/industries#higher-education" },
+        { "label": "Government", "href": "/industries#government" },
+        { "label": "Corporate", "href": "/industries#corporate" },
+        { "label": "Health", "href": "/industries#health" }
+      ]
+    }
+  ],
+  "legal": [
+    { "label": "Privacy Policy", "href": "/privacy-policy" }
+  ]
+}

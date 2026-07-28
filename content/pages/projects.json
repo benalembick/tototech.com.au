@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "university-campus-technology",
+    "title": "University Campus Technology",
+    "category": "Higher Education",
+    "summary": "A multi-year technology roadmap for teaching spaces, research infrastructure and student experience across a multi-campus university.",
+    "outcomes": [
+      "Unified technology roadmap across 6 campuses",
+      "Standardised teaching space reference architecture",
+      "Improved student digital experience scores"
+    ],
+    "tags": ["Campus Technology", "Strategy", "Smart Buildings"]
+  },
+  {
+    "slug": "enterprise-architecture-review",
+    "title": "Enterprise Architecture Review",
+    "category": "Corporate",
+    "summary": "An independent architecture review identifying technical debt, integration risk and a prioritised remediation roadmap.",
+    "outcomes": [
+      "Full application and integration landscape assessment",
+      "Risk-prioritised architecture roadmap",
+      "Executive-ready investment business case"
+    ],
+    "tags": ["Enterprise Architecture", "Governance", "Advisory"]
+  },
+  {
+    "slug": "digital-transformation-program",
+    "title": "Digital Transformation Program",
+    "category": "Government",
+    "summary": "Operating model redesign and technology modernisation program supporting a large-scale digital service transformation.",
+    "outcomes": [
+      "New target operating model adopted enterprise-wide",
+      "Legacy platform modernisation program mobilised",
+      "PMO and business readiness framework established"
+    ],
+    "tags": ["Digital Transformation", "Program Delivery", "Change"]
+  },
+  {
+    "slug": "smart-building-technology",
+    "title": "Smart Building Technology",
+    "category": "Commercial Property",
+    "summary": "IoT, occupancy analytics and digital infrastructure design for a premium commercial property portfolio.",
+    "outcomes": [
+      "Portfolio-wide smart building reference design",
+      "Occupancy analytics platform selection and rollout",
+      "Reduced operational technology overhead"
+    ],
+    "tags": ["Smart Buildings", "IoT", "Infrastructure"]
+  },
+  {
+    "slug": "workplace-technology-strategy",
+    "title": "Workplace Technology Strategy",
+    "category": "Corporate",
+    "summary": "A future-of-work technology strategy aligning meeting room, collaboration and hybrid work technology with workplace design.",
+    "outcomes": [
+      "Enterprise-wide meeting room technology standard",
+      "Hybrid collaboration platform strategy",
+      "Multi-year investment and refresh roadmap"
+    ],
+    "tags": ["Technology Strategy", "Smart Buildings", "Workplace"]
+  }
+]

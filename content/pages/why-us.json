@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Executive Experience",
+    "icon": "Briefcase",
+    "description": "Senior advisory grounded in years of executive and leadership experience across enterprise technology."
+  },
+  {
+    "title": "Vendor Independent",
+    "icon": "ShieldCheck",
+    "description": "Recommendations are shaped by your outcomes, not by product partnerships or referral arrangements."
+  },
+  {
+    "title": "Enterprise Scale",
+    "icon": "Building2",
+    "description": "Experience working within complex, multi-stakeholder organisations where change is hard-won."
+  },
+  {
+    "title": "Strategic Thinking",
+    "icon": "Compass",
+    "description": "Every recommendation is tied back to strategic intent, not technology for its own sake."
+  },
+  {
+    "title": "Hands-On Delivery",
+    "icon": "Wrench",
+    "description": "Advisory that stays in the room through delivery, not just at the strategy stage."
+  },
+  {
+    "title": "Trusted Advisor",
+    "icon": "Handshake",
+    "description": "Long-standing relationships built on candour, discretion and consistent follow-through."
+  },
+  {
+    "title": "Australian Owned",
+    "icon": "MapPin",
+    "description": "An independent Australian firm with deep local market and regulatory knowledge."
+  },
+  {
+    "title": "Outcome Focused",
+    "icon": "Target",
+    "description": "Success is measured by the outcomes delivered, not the hours billed or artefacts produced."
+  }
+]

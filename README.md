@@ -5,13 +5,13 @@ strategy, enterprise architecture and transformation advisory practice.
 
 ## Stack
 
-- **Next.js 16** (App Router, static generation where possible)
-- **TypeScript**
-- **Tailwind CSS v4**
-- **Framer Motion** for animation
-- **Lucide** for iconography
-- **React Hook Form + Zod** for the contact form
-- Content lives in structured JSON (`src/content/*.json`), not hardcoded in components
+- Next.js 16 (App Router, runtime rendering for CMS-managed pages)
+- TypeScript
+- Tailwind CSS v4
+- Framer Motion for animation
+- Lucide for iconography
+- React Hook Form + Zod for the contact form
+- Lightweight file-based CMS content in local JSON files under `content/`
 
 ## Getting started
 
@@ -20,7 +20,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:5176](http://localhost:5176) in development.
 
 ```bash
 npm run build   # production build
@@ -28,64 +28,79 @@ npm run start   # run the production build locally
 npm run lint    # eslint
 ```
 
+The admin area is available at [http://localhost:5176/admin](http://localhost:5176/admin)
+in development. Set a real password before exposing the site:
+
+```bash
+CMS_ADMIN_PASSWORD="replace-with-a-strong-password"
+CMS_SESSION_SECRET="replace-with-a-long-random-secret"
+```
+
+If these are not set, the local fallback password is `changeme`.
+
 ## Project structure
 
-```
+```txt
 src/
   app/                  Route segments (App Router), one folder per page
+    admin/              Password-protected CMS admin interface
+    api/admin/          Local JSON and image upload CMS endpoints
     api/contact/        Contact form submission endpoint
-    icon.tsx            Favicon (generated from the brand mark)
     opengraph-image.tsx Open Graph / Twitter card image
-    sitemap.ts           /sitemap.xml
-    robots.ts            /robots.txt
+    sitemap.ts          /sitemap.xml
+    robots.ts           /robots.txt
   components/
     brand/              Logo mark + lockup
     layout/             Navbar, Footer, Container, Section, animation helpers
-    sections/           Page-level building blocks (hero, cards, CTA, timeline, contact form…)
-    ui/                 Small primitives (Button, Input, Textarea, Label)
-  content/              Structured JSON content — the "CMS" layer
-  lib/                  Types, icon registry, validation schemas, utils
+    sections/           Page-level building blocks
+    ui/                 Small primitives
+  content/              Bundled fallback JSON content for first-run safety
+  lib/                  Types, CMS helpers, icon registry, validation schemas
+
+content/
+  pages/                Editable page and collection JSON files
+  posts/                Editable post JSON files
+  settings/             Editable site/nav settings
+
+public/
+  uploads/              Uploaded images served by the public site
 ```
 
-### Editing content
+## Editing content
 
-All copy for services, industries, projects, the "why us" section, stats,
-about page and insights lives in `src/content/*.json`. Update those files
-rather than editing components — this is what keeps content and
-presentation separate so a future CMS integration only has to replace the
-JSON import, not the components.
+Most site content is now edited from `/admin` and saved directly to JSON
+files in `content/`. Uploaded images are saved to `public/uploads/` and
+can be referenced in JSON as `/uploads/filename.ext`.
 
-### Contact form
+The legacy `src/content/*.json` files remain as read-only fallbacks so the
+site still renders if a local content file is missing. New edits should be
+made through `/admin` or directly in `content/`, not `src/content/`.
+
+This CMS is intentionally database-free. It does not use SQL, Prisma,
+MongoDB, Firebase, Supabase or any hosted database.
+
+## Contact form
 
 `src/app/api/contact/route.ts` validates submissions with the shared Zod
 schema (`src/lib/validations/contact.ts`) and currently logs the enquiry.
-Wire it up to an email or CRM provider (e.g. Resend, SendGrid, HubSpot) by
-replacing the `console.log` with a provider call — no other changes are
-required.
-
-## Brand
-
-Colours, fonts and the icon mark are defined once in
-`src/app/globals.css` (`@theme` block) and `src/components/brand/`. The
-palette (deep navy, electric blue gradient, light greys) and the
-Space Grotesk / Inter type pairing are derived from the TOTOTECH logo.
+Wire it up to an email or CRM provider by replacing the `console.log` with
+a provider call.
 
 ## SEO
 
-- Per-page `metadata` exports (title, description, canonical, Open Graph)
+- Per-page metadata exports
 - Dynamic OG/Twitter image and favicon generated from the brand mark
-- `sitemap.xml` and `robots.txt` generated from `src/content/site.json`
+- `sitemap.xml` and `robots.txt` generated from `content/settings/site.json`
 - `ProfessionalService` JSON-LD in the root layout
-
-## Planned extensions
-
-The structure is intentionally left room for: a client portal, a full
-blog/CMS behind `/insights`, a resource library, appointment booking, an
-AI assistant, a case-study CMS, newsletter sign-up, secure document
-sharing and a client dashboard.
 
 ## Deployment
 
-Any Next.js-compatible host works (Vercel is the simplest). Set the
-production domain in `src/content/site.json` (`domain`) before deploying
-so metadata, sitemap and JSON-LD resolve to the correct URL.
+Use a Next.js-compatible host or self-hosted Node.js server where the app
+process has permission to write to the local filesystem. Set the production
+domain in `content/settings/site.json` (`domain`) before deploying so
+metadata, sitemap and JSON-LD resolve to the correct URL.
+
+Important: file writing and image uploads will not work properly on purely
+static hosts, read-only serverless filesystems, or deployments that discard
+runtime filesystem changes. Use a persistent server or a compatible
+deployment target with writable persistent storage.

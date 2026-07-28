@@ -4,10 +4,9 @@ import { Section } from "@/components/layout/section";
 import { Stagger } from "@/components/layout/animation-wrapper";
 import { IndustryCard } from "@/components/sections/industry-card";
 import { CTA } from "@/components/sections/cta";
-import industriesData from "@/content/industries.json";
-import type { Industry } from "@/lib/types";
+import { getIndustries } from "@/lib/content-data";
 
-const industries = industriesData as Industry[];
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Industries",
@@ -21,7 +20,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function IndustriesPage() {
+export default async function IndustriesPage() {
+  const industries = await getIndustries();
+
   return (
     <>
       <PageHero

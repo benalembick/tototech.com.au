@@ -1,0 +1,32 @@
+{
+  "hero": {
+    "eyebrow": "Australian owned · Vendor independent",
+    "title": "Technology strategy for organisations building the future",
+    "highlight": "building the future",
+    "description": "Helping organisations design, transform and optimise enterprise technology environments — with independent advice you can trust.",
+    "primaryCta": { "label": "Book a Consultation", "href": "/contact" },
+    "secondaryCta": { "label": "Our Services", "href": "/services" }
+  },
+  "sections": {
+    "services": {
+      "eyebrow": "Services",
+      "title": "Advisory across the full technology lifecycle",
+      "description": "From strategy and architecture through to hands-on delivery — a single, vendor-independent partner across the technology decisions that matter."
+    },
+    "industries": {
+      "eyebrow": "Industries",
+      "title": "Sector depth across complex environments",
+      "description": "Deep experience across the industries where technology decisions carry genuine organisational weight."
+    },
+    "whyUs": {
+      "eyebrow": "Why TOTOTECH",
+      "title": "A trusted, independent advisor",
+      "description": "Executive-grade advisory built on genuine delivery experience — not just frameworks and slideware."
+    },
+    "projects": {
+      "eyebrow": "Featured Projects",
+      "title": "Outcomes across enterprise, education and infrastructure",
+      "description": "A selection of representative engagements across strategy, architecture and transformation."
+    }
+  }
+}

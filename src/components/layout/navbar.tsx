@@ -9,12 +9,9 @@ import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { cn } from "@/lib/utils";
-import navData from "@/content/nav.json";
 import type { NavLink } from "@/lib/types";
 
-const links = navData.primary as NavLink[];
-
-export function Navbar() {
+export function Navbar({ links }: { links: NavLink[] }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
