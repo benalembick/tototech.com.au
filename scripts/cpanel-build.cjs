@@ -1,54 +1,35 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 const { spawnSync } = require("node:child_process");
-const { existsSync, lstatSync, rmSync } = require("node:fs");
+const { existsSync } = require("node:fs");
 const { dirname, join } = require("node:path");
 
 const projectRoot = process.env.CPANEL_APP_ROOT || dirname(process.env.npm_package_json || join(process.cwd(), "package.json"));
-const nodeModulesPath = join(projectRoot, "node_modules");
-const nextBin = join(projectRoot, "node_modules", "next", "dist", "bin", "next");
+const virtualEnvRoot = process.cwd();
 
-function npmCommand() {
-  return process.platform === "win32" ? "npm.cmd" : "npm";
+function nextCandidates() {
+  return [
+    join(projectRoot, "node_modules", "next", "dist", "bin", "next"),
+    join(virtualEnvRoot, "node_modules", "next", "dist", "bin", "next"),
+    join(dirname(process.env.npm_package_json || join(virtualEnvRoot, "package.json")), "node_modules", "next", "dist", "bin", "next"),
+  ];
 }
 
-function nodeModulesIsSymlink() {
-  try {
-    return lstatSync(nodeModulesPath).isSymbolicLink();
-  } catch (error) {
-    if (error?.code === "ENOENT") return false;
-    throw error;
-  }
+function findNextBin() {
+  return nextCandidates().find((candidate) => existsSync(candidate));
 }
 
-function installLocalDependencies() {
-  return spawnSync(npmCommand(), ["install", "--include=dev", "--ignore-scripts"], {
-    cwd: projectRoot,
-    stdio: "inherit",
-    env: {
-      ...process.env,
-      npm_config_include: "dev",
-    },
-  });
+const nextBin = findNextBin();
+
+if (!nextBin) {
+  console.error("[deploy] Cannot find Next.js in either the app node_modules or cPanel virtualenv node_modules.");
+  console.error(`[deploy] App root: ${projectRoot}`);
+  console.error(`[deploy] Virtualenv root: ${virtualEnvRoot}`);
+  console.error("[deploy] Let cPanel finish dependency installation, then run this script again. No nested npm install was attempted.");
+  process.exit(1);
 }
 
-if (nodeModulesIsSymlink()) {
-  console.log("[deploy] node_modules is still a symlink; replacing it with a local install before building.");
-  rmSync(nodeModulesPath, { force: true });
-  const install = installLocalDependencies();
-
-  if (install.status !== 0) {
-    process.exit(install.status ?? 1);
-  }
-}
-
-if (!existsSync(nextBin)) {
-  console.error("[deploy] Cannot find local Next.js binary. Running a local dependency install before building.");
-  const install = installLocalDependencies();
-
-  if (install.status !== 0) {
-    process.exit(install.status ?? 1);
-  }
-}
+console.log(`[deploy] Building app from ${projectRoot}`);
+console.log(`[deploy] Using Next.js binary at ${nextBin}`);
 
 const result = spawnSync(process.execPath, [nextBin, "build", "--webpack"], {
   cwd: projectRoot,
@@ -56,6 +37,10 @@ const result = spawnSync(process.execPath, [nextBin, "build", "--webpack"], {
   env: {
     ...process.env,
     NEXT_TELEMETRY_DISABLED: "1",
+    NODE_OPTIONS: [
+      process.env.NODE_OPTIONS || "",
+      "--max-old-space-size=1536",
+    ].join(" ").trim(),
   },
 });
 
