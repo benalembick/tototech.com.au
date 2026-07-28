@@ -7,8 +7,8 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
-    "preinstall": "node scripts/cpanel-preinstall.mjs",
-    "postinstall": "node scripts/cpanel-build.mjs"
+    "preinstall": "node -e \"require(require('path').join(require('path').dirname(process.env.npm_package_json || require('path').join(process.cwd(), 'package.json')), 'scripts/cpanel-preinstall.cjs'))\"",
+    "postinstall": "node -e \"require(require('path').join(require('path').dirname(process.env.npm_package_json || require('path').join(process.cwd(), 'package.json')), 'scripts/cpanel-build.cjs'))\""
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",

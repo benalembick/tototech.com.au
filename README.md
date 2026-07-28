@@ -35,10 +35,12 @@ The project includes cPanel-friendly npm lifecycle scripts so the cPanel
 
 - `.npmrc` forces dev dependencies to be installed because Next.js needs
   build-time packages on the server.
-- `preinstall` removes cPanel's symlinked `node_modules` only when it is a
-  symlink, then clears stale `.next` output.
-- `postinstall` runs `next build --webpack` directly to avoid Turbopack's
-  cPanel virtualenv symlink issue.
+- `preinstall` resolves the project root through npm, removes cPanel's
+  symlinked `node_modules` only when it is a symlink, then clears stale
+  `.next` output.
+- `postinstall` resolves the project root through npm and runs
+  `next build --webpack` directly to avoid Turbopack's cPanel virtualenv
+  symlink issue.
 
 If the cPanel button still fails after a major Node/Next/cPanel change, the
 manual equivalent remains:
